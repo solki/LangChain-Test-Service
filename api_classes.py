@@ -3,11 +3,17 @@ from flask_restful import Resource
 from functools import wraps
 import json
 from langchain.llms import OpenAI
+from langchain.chat_models import ChatOpenAI
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.chains import RetrievalQA
 from langchain.chains.summarize import load_summarize_chain
+from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.prompts import PromptTemplate
-from langchain.chat_models import ChatOpenAI
+
 from langchain import PromptTemplate, LLMChain
+from langchain.vectorstores import FAISS
+
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
@@ -124,6 +130,24 @@ class SummarizeLongDoc(Resource):
         return dict(summary=output)
 
 
+class ResponseFromDoc(Resource):
+    @check_api_key
+    def post(self):
+        file = request.files.get('file')
+        if not file:
+            return dict(error='No file provided')
+        loader = TextLoader(file)
+        doc = loader.load()
+        # content = file.read().decode('utf-8')
+        text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=3000, chunk_overlap=150)
+        docs = text_splitter.split_documents(doc)
+        llm = OpenAI(model_name='text-davinci-003', temperature=0)
+        # Get your chain ready to use
+        chain = load_summarize_chain(llm=llm, chain_type='map_reduce', verbose=True)
+        output = chain.run(docs)
+        return dict(summary=output)
+
+
 class GetGPTResponse(Resource):
     @check_api_key
     def post(self):
@@ -134,14 +158,3 @@ class GetGPTResponse(Resource):
         user_input = data['message']
         resp = llm(user_input)
         return dict(message=resp)
-
-
-class HelloWorld(Resource):
-    @check_api_key
-    def get(self):
-        your_name = request.args.get('your_name')
-        if your_name:
-            return dict(message=f'Hello {your_name}')
-        else:
-            print("no name is found")
-            return dict(error="Please provide a name using the 'your_name' parameter"), 400
