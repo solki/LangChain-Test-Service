@@ -1,0 +1,60 @@
+{
+    "tasks": [
+      {
+        "name": "Summary",
+        "var": "summary",
+        "sys_msg": "empty",
+        "message": "Perform the following actions:\n1. Summarize the following text delimited by triple backticks in detail in Chinese.\n2. Output a json object that contains the following key: summary.\nYour answer must be the json object only.\n\nText:\n```{text}```"
+      },
+      {
+        "name": "Customer Tags",
+        "var": "customer_tags",
+        "sys_msg": "You are a helpful assistant.",
+        "message": "Perform the following actions:\n1. Extract as many customer tags as possible in the given text delimited by triple backticks in Chinese.\n2. Output a json object that contains the following key: tags.\n3. If the tag isn't found, use 'unknown' as the value.\n Your answer must be the json object only.\n\nText:\n```{text}```"
+      },
+      {
+        "name": "Selling Tips",
+        "var": "selling_tips",
+        "sys_msg": "You are a top salesman in luxury retail.",
+        "message": "Perform the following actions:\n1. Please give at least 5 sales strategies in Chinese if you are facing the same situation described in the given text delimited by triple backticks.\n2. Output a json object that contains the following key: tips.\nYour answer must be the json object only.\n\nText:\n```{text}```"
+      },
+      {
+        "name": "Sentiment Analysis",
+        "var": "sentiment",
+        "sys_msg": "empty",
+        "message": "以下产品评论的情绪是什么，\n\n用一个词给出你的答案，要么是“正面”或“负面”。"
+      },
+      {
+        "name": "Sentiment Analysis Plus",
+        "var": "sentiment_plus",
+        "sys_msg": "empty",
+        "message": "确定作者的情绪列表 \n以下评论正在表达。包括不超过 \n列表中的五个项目。将您的答案格式化为 \n用逗号分隔。"
+      },
+      {
+        "name": "Sentiment Analysis Plus II",
+        "var": "sentiment_plus_2",
+        "sys_msg": "empty",
+        "message": "从下面的评论文本中识别以下项目：\n- 优点\n- 缺点\n，尽可能简短。"
+      },
+      {
+        "name": "Topic Inferring",
+        "var": "topic_inferring",
+        "sys_msg": "empty",
+        "message": "归纳总结下面这段文本包含的主题，\n\n要求：让每个主题用2到4个字概括，以专业的术语表达，并用逗号分隔"
+      },
+      {
+        "name": "Topic Existence",
+        "var": "topic_existence",
+        "sys_msg": "You are a helpful assistant.",
+        "message": "Determine whether each item in the following list of topics is a topic in the following text delimited by triple backticks.\n\nGive your answer as list with 1 or 0 for 'exist' or 'not exist' on each topic.\n\nList of topics: '品质', '服务', '款式', '价格'"
+      },
+      {
+        "name": "CS Response",
+        "var": "cs_response",
+        "sys_msg": "You are a customer service professional.",
+        "message": "你的任务是向尊贵的客户发送电子邮件回复。下面是一封来自客户的电子邮件，请生成回复以感谢客户的评论。\n如果客户的情绪是积极的或中立的，感谢他们的评论。\n如果情绪是负面的，道歉并建议他们可以联系客户服务。\n你需要使用客户邮件中提到的具体细节，并加以回应。\n以简洁和专业的语气写作。\n将电子邮件签名为“AI客户代理”。"
+      }
+    ]
+  }
+
+  
