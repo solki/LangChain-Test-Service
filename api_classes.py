@@ -43,6 +43,7 @@ def check_api_key(func):
     def decorated_function(*args, **kwargs):
         api_keys = load_api_keys()
         api_key = request.headers.get('api_key')
+        # print(api_key)
         if api_key in api_keys.values():
             return func(*args, **kwargs)
         else:
