@@ -1,10 +1,15 @@
 from flask import request
 from flask_restful import Resource
 from functools import wraps
+import faiss
 import json
+import pickle
+from langchain.embeddings import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.chains import RetrievalQAWithSourcesChain
+from langchain.chains.question_answering import load_qa_chain
+# from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.chains.summarize import load_summarize_chain
 from langchain.document_loaders import TextLoader
@@ -121,7 +126,7 @@ class SummarizeLongDoc(Resource):
         if not file:
             return dict(error='No file provided')
         content = file.read().decode('utf-8')
-        text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=3000, chunk_overlap=150)
+        text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=2000, chunk_overlap=150)
         docs = text_splitter.create_documents([content])
         llm = OpenAI(model_name='text-davinci-003', temperature=0)
         # Get your chain ready to use
@@ -133,28 +138,51 @@ class SummarizeLongDoc(Resource):
 class ResponseFromDoc(Resource):
     @check_api_key
     def post(self):
+        # Check if file and query are present in the request
+        if 'file' not in request.files or 'query' not in request.form:
+            return dict(message='File and query are required.'), 400
+        query = request.form['query']
         file = request.files.get('file')
         if not file:
             return dict(error='No file provided')
-        loader = TextLoader(file)
-        doc = loader.load()
-        # content = file.read().decode('utf-8')
-        text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=3000, chunk_overlap=150)
-        docs = text_splitter.split_documents(doc)
+        content = file.read().decode('utf-8')
+        text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n", "\n"], chunk_size=3000, chunk_overlap=350)
+        docs = text_splitter.split_documents([content])
+        embeddings = OpenAIEmbeddings()
         llm = OpenAI(model_name='text-davinci-003', temperature=0)
-        # Get your chain ready to use
-        chain = load_summarize_chain(llm=llm, chain_type='map_reduce', verbose=True)
-        output = chain.run(docs)
-        return dict(summary=output)
+        doc_search = FAISS.from_documents(docs, embeddings)
+        qa = RetrievalQA.from_chain_type(llm=llm, chain_type='stuff', retriever=doc_search.as_retriever())
+        return qa.run(query)
 
 
 class GetGPTResponse(Resource):
     @check_api_key
     def post(self):
-        llm = OpenAI(temperature=0.5)
+        chat = ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0)
         data = request.get_json()
         if not data or 'message' not in data:
             return dict(error="Please provide a piece of message in the JSON data using the 'message' key"), 400
         user_input = data['message']
-        resp = llm(user_input)
-        return dict(message=resp)
+        messages = [
+            SystemMessage(content="You are a helpful customer service assistant."),
+            HumanMessage(content=user_input)
+        ]
+        resp = chat(messages)
+        return dict(message=resp.content)
+
+
+class GetDocResponse(Resource):
+    @check_api_key
+    def post(self):
+        with open("./data/faiss_store_openai.pkl", "rb") as f:
+            vector_store = pickle.load(f)
+        if not vector_store:
+            return dict(error='No vector file provided')
+        llm = OpenAI(temperature=0)
+        chain = RetrievalQAWithSourcesChain.from_llm(llm=llm, retriever=vector_store.as_retriever())
+        data = request.get_json()
+        if not data or 'message' not in data:
+            return dict(error="Please provide a piece of message in the JSON data using the 'message' key"), 400
+        query = data['message']
+        print(query)
+        return dict(message=chain({"question": query}))

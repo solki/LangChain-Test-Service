@@ -34,13 +34,13 @@
         "name": "Sentiment Analysis Plus II",
         "var": "sentiment_plus_2",
         "sys_msg": "empty",
-        "message": "Identify the following items from the review text: \n- the pros\n- the cons\nof the product.\nThe review is delimited with triple backticks. \nFormat your response as a JSON object with \n'pros' and 'cons' as the keys. the values need to be a list \nIf the information isn't present, use 'unknown' \nas the value of the list.\nMake your response as short as possible.\nYour answer must be the json object only.\n\nReview Text: '''{text}'''"
+        "message": "Identify the following items from the review text: \n- the pros\n- the cons\nof the product.\nThe review is delimited with triple backticks. \nFormat your response as a JSON object with pros and cons as the keys. the values need to be a list \nIf the information isn't present, use 'unknown' \nas the value of the list.\nMake your response as short as possible.\nYour answer must be the json object only.\n\nReview Text: '''{text}'''"
       },
       {
         "name": "Topic Inferring",
         "var": "topic_inferring",
         "sys_msg": "empty",
-        "message": "Determine five topics that are being discussed in the \nfollowing text, which is delimited by triple backticks.\n\nMake each item one or two words long. \nFormat your response as a JSON object with \n'topics' as the key. the value needs to be a list of the topics \nIf the information isn't present, use 'unknown' as the value of the list.\nMake your response as short as possible.\nYour answer must be the json object only.\n\nReview Text: '''{text}'''"
+        "message": "Determine five topics that are being discussed in the \nfollowing text, which is delimited by triple backticks.\n\nMake each item one or two words long. \nFormat your response as a JSON object with \"topics\" as the key. the value needs to be a list of the topics \nIf the information isn't present, use 'unknown' as the value of the list.\nMake your response as short as possible.\nYour answer must be the json object only.\n\nReview Text: '''{text}'''"
       },
       {
         "name": "Topic Existence",
@@ -52,7 +52,7 @@
         "name": "CS Response",
         "var": "cs_response",
         "sys_msg": "You are a customer service AI assistant.",
-        "message": "Your task is to send an email reply to a valued customer.\nGiven the customer email delimited by triple backticks, \nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \ntheir review.\nIf the sentiment is negative, apologize and suggest that \nthey can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nFormat your response as a JSON object with \n'response' as the key\n\nCustomer Review: ```{text}```"
+        "message": "Your task is to send an email reply to a valued customer.\nGiven the customer email delimited by triple backticks, \nGenerate a reply to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for \ntheir review.\nIf the sentiment is negative, apologize and suggest that they can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nFormat your response as a JSON object with \"response\" as the key\n\nCustomer Review: ```{text}```"
       }
     ]
   }
