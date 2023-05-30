@@ -117,7 +117,7 @@ class GetChatResponse(Resource):
         # return dict(results=json.loads(resp.content))
         print(resp.content)
         # return jsonify({'results': resp.content})
-        return json.loads(resp.content)
+        return resp.content
 
 
 class SummarizeLongDoc(Resource):

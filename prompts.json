@@ -11,8 +11,8 @@
         "name": "Customer Tags",
         "var": "customer_tags",
         "sys_msg": "You are a helpful assistant.",
-        "message": "Extract as many customer tags as possible in the given text delimited by triple backticks in Chinese. If the tag isn't found, use 'none' as the value.\n\nText:\n```{text}```",
-        "message_json": "Perform the following actions:\n1. Extract as many customer tags as possible in the given text delimited by triple backticks in Chinese.\n2. Output a json object that contains the following key: tags.\n3. If the tag isn't found, use 'none' as the value.\n Your answer must be the json object only.\n\nText:\n```{text}```"
+        "message": "Extract as many customer tags as possible in the given text delimited by triple backticks. Your answer must be in a list format. \n\nText:\n```{text}```",
+        "message_json": "Perform the following actions:\n1. Extract as many customer tags as possible in the given text delimited by triple backticks.\n2. Output a json object that contains the following key: tags.\n3. If the tag isn't found, use 'none' as the value.\n Your answer must be the json object only.\n\nText:\n```{text}```"
       },
       {
         "name": "Selling Tips",
