@@ -4,21 +4,21 @@
         "name": "Summary",
         "var": "summary",
         "sys_msg": "empty",
-        "message": "Summarize the following text delimited by triple backticks in details in Chinese.\n\nText:\n```{text}```",
+        "message": "Summarize the following text delimited by triple backticks in details in English.\n\nText:\n```{text}```",
         "message_json": "Perform the following actions:\n1. Summarize the following text delimited by triple backticks in details in Chinese.\n2. Output a json object that contains the following key: summary.\nYour answer must be the json object only.\n\nText:\n```{text}```"
       },
       {
         "name": "Customer Tags",
         "var": "customer_tags",
         "sys_msg": "You are a helpful assistant.",
-        "message": "Extract as many customer tags as possible in the given text delimited by triple backticks. Your answer must be in a list format. \n\nText:\n```{text}```",
+        "message": "Extract as many customer tags as possible in the given text delimited by triple backticks. Your answer must be in a list format and in English. \n\nText:\n```{text}```",
         "message_json": "Perform the following actions:\n1. Extract as many customer tags as possible in the given text delimited by triple backticks.\n2. Output a json object that contains the following key: tags.\n3. If the tag isn't found, use 'none' as the value.\n Your answer must be the json object only.\n\nText:\n```{text}```"
       },
       {
         "name": "Selling Tips",
         "var": "selling_tips",
         "sys_msg": "You are a top salesman in luxury retail.",
-        "message": "Please give at least 5 sales strategies in Chinese if you are facing the same situation described in the given text delimited by triple backticks.\n\nText:\n```{text}```",
+        "message": "Please give at least 5 sales strategies in English if you are facing the same situation described in the given text delimited by triple backticks.\n\nText:\n```{text}```",
         "message_json": "Perform the following actions:\n1. Please give at least 5 sales strategies in Chinese if you are facing the same situation described in the given text delimited by triple backticks.\n2. Output a json object that contains the following key: tips.\nYour answer must be the json object only.\n\nText:\n```{text}```"
       },
       {
@@ -32,35 +32,35 @@
         "name": "Sentiment Analysis Plus",
         "var": "sentiment_plus",
         "sys_msg": "empty",
-        "message": "Identify a list of emotions that the writer of the following review, delimited with triple backticks, is expressing. Your answer must be in Chinese.\n\nReview Text:\n```{text}```",
+        "message": "Identify a list of emotions that the writer of the following review, delimited with triple backticks, is expressing. Your answer must be in English.\n\nReview Text:\n```{text}```",
         "message_json": "Perform the following actions:\n1. Identify a list of emotions that the writer of the following review, delimited with triple backticks, is expressing.\n2. Translate the items in the list into Chinese if they are not.\n3. Output a json object that contains the following key: sentiments.\n4. Your answer must be the json object only.\n\nReview Text:\n```{text}```"
       },
       {
         "name": "Sentiment Analysis Plus II",
         "var": "sentiment_plus_2",
         "sys_msg": "empty",
-        "message": "Identify the following items from the review text: \n- the pros\n- the cons\nof the product.\nThe review is delimited with triple backticks. \nIf the information isn't present, use 'unknown' as the value of the list. \nMake your response as short as possible.\nYour answer must be in Chinese.\n\nReview Text: '''{text}'''",
+        "message": "Identify the following items from the review text: \n- the pros\n- the cons\nof the product.\nThe review is delimited with triple backticks. \nIf the information isn't present, use 'unknown' as the value of the list. \nMake your response as short as possible.\nYour answer must be in English.\n\nReview Text: '''{text}'''",
         "message_json": "Identify the following items from the review text: \n- the pros\n- the cons\nof the product.\nThe review is delimited with triple backticks. \nFormat your response as a JSON object with pros and cons as the keys. the values need to be a list \nIf the information isn't present, use 'unknown' as the value of the list. \n Translate the values into Chinese if they are not. \nMake your response as short as possible.\nYour answer must be the json object only.\n\nReview Text: '''{text}'''"
       },
       {
         "name": "Topic Inferring",
         "var": "topic_inferring",
         "sys_msg": "empty",
-        "message": "Determine five topics that are being discussed in the following text, which is delimited by triple backticks.\n\nMake each item one or two words long. \nIf the information isn't present, use 'unknown' as your answer. \nMake your response as short as possible. \nYour answer must be in Chinese.\n\nReview Text: '''{text}'''",
+        "message": "Determine five topics that are being discussed in the following text, which is delimited by triple backticks.\n\nMake each item one or two words long. \nIf the information isn't present, use 'unknown' as your answer. \nMake your response as short as possible. \nYour answer must be in English.\n\nReview Text: '''{text}'''",
         "message_json": "Determine five topics that are being discussed in the following text, which is delimited by triple backticks.\n\nMake each item one or two words long. \nFormat your response as a JSON object with 'topics' as the key. the value needs to be a list of the topics \nIf the information isn't present, use 'unknown' as the value of the list.\nTranslate the values into Chinese if they are not.\nMake your response as short as possible.\nYour answer must be the json object only.\n\nReview Text: '''{text}'''"
       },
       {
         "name": "Topic Existence",
         "var": "topic_existence",
         "sys_msg": "You are a helpful assistant.",
-        "message": "Determine whether each item in the following list of topics is a topic in the following text delimited by triple backticks.\n\nGive your answer as list with 1 or 0 for 'exist' or 'not exist' on each topic.\n\nList of topics: '质量', '服务', '款式', '价格'.\n\nReview Text: '''{text}'''",
+        "message": "Determine whether each item in the following list of topics is a topic in the following text delimited by triple backticks.\n\nGive your answer as list with 1 or 0 for 'exist' or 'not exist' on each topic.\n\nList of topics: 'Quality', 'Service', 'Type', 'Price'.\n\nReview Text: '''{text}'''",
         "message_json": "Determine whether each item in the following list of topics is a topic in the following text delimited by triple backticks.\n\nGive your answer as list with 1 or 0 for 'exist' or 'not exist' on each topic.\n\nList of topics: '质量', '服务', '款式', '价格'\nFormat your response as a JSON object with the topic names as the keys.\nYour answer must be the json object only.\n\nReview Text: '''{text}'''"
       },
       {
         "name": "CS Response",
         "var": "cs_response",
         "sys_msg": "You are a customer service AI assistant.",
-        "message": "Your task is to send an email reply to a valued customer.\nGiven the customer email delimited by triple backticks, \nGenerate a reply letter to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for their review.\nIf the sentiment is negative, apologize and suggest that they can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`. \nMake your email witten in Chinese. \n\nCustomer Review: ```{text}```",
+        "message": "Your task is to send an email reply to a valued customer.\nGiven the customer email delimited by triple backticks, \nGenerate a reply letter to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for their review.\nIf the sentiment is negative, apologize and suggest that they can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`. \nMake your email witten in English. \n\nCustomer Review: ```{text}```",
         "message_json": "Your task is to send an email reply to a valued customer.\nGiven the customer email delimited by triple backticks, \nGenerate a reply in Chinese to thank the customer for their review.\nIf the sentiment is positive or neutral, thank them for their review.\nIf the sentiment is negative, apologize and suggest that they can reach out to customer service. \nMake sure to use specific details from the review.\nWrite in a concise and professional tone.\nSign the email as `AI customer agent`.\nFormat your response as a JSON object with 'response' as the key\n\nCustomer Review: ```{text}```"
       }
     ]
