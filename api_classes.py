@@ -1,7 +1,6 @@
 from flask import request
 from flask_restful import Resource
 from functools import wraps
-import faiss
 import json
 import pickle
 from langchain.embeddings import OpenAIEmbeddings
@@ -9,7 +8,6 @@ from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.chains.question_answering import load_qa_chain
-# from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.chains.summarize import load_summarize_chain
 from langchain.document_loaders import TextLoader
